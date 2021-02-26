@@ -1,16 +1,18 @@
 package pl.warehouseapi.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import pl.warehouseapi.application.dto.ProductDto;
 import pl.warehouseapi.application.service.ProductService;
 import pl.warehouseapi.domain.agregate.Product;
+
+import javax.validation.Valid;
 import java.util.List;
 
-@RestController("/warehouseapi")
+@RestController
+@RequestMapping("/warehouseapi/product")
+@Validated
 public class ProductController {
 
     @Autowired
@@ -21,7 +23,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDto addProduct(Product product) {
+    public ProductDto addProduct(@Valid @RequestBody Product product) {
         return service.addProduct(product);
     }
 
@@ -31,7 +33,7 @@ public class ProductController {
     }
 
     @PutMapping
-    public ProductDto updateProduct(Product product) {
+    public ProductDto updateProduct(@Valid @RequestBody Product product) {
         return service.updateProduct(product);
     }
 }

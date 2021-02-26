@@ -1,10 +1,11 @@
-package pl.warehouseapi.application.service;
+package pl.warehouseapi.application.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.warehouseapi.application.dto.ProductDto;
 import pl.warehouseapi.application.dto.mapper.WarehouseApiMapper;
+import pl.warehouseapi.application.service.ProductService;
 import pl.warehouseapi.domain.agregate.Product;
 import pl.warehouseapi.domain.exception.ProductNotFoundException;
 import pl.warehouseapi.infrastructure.persistance.ProductRepository;
@@ -44,7 +45,6 @@ public class ProductServiceImp implements ProductService {
 
         productToUpdate.setName(product.getName());
         productToUpdate.setPrice(product.getPrice());
-
         return mapper.ProductToProductDto(productToUpdate);
     }
 }

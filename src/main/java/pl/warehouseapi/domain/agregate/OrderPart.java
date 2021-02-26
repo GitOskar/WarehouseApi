@@ -6,24 +6,22 @@ import lombok.NoArgsConstructor;
 import pl.warehouseapi.domain.primitive.BaseEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @Entity @Table(name = "ORDER_PART")
 public class OrderPart extends BaseEntity {
-
     @Column(name = "QUANTITY")
-    private int quantity;
-
+    private BigDecimal quantity;
     @ManyToOne
-    @JoinColumn(name = "STUDENT_ID")
-    Order order;
-
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
-    Product product;
+    private Product product;
 
-    public double getPriceOfProduct() {
+    public BigDecimal getPriceOfProduct() {
         return product.getPrice();
     }
 }

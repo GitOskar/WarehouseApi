@@ -13,6 +13,7 @@ import pl.warehouseapi.application.dto.mapper.WarehouseApiMapper;
 import pl.warehouseapi.domain.agregate.Order;
 import pl.warehouseapi.domain.agregate.Product;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
@@ -32,8 +33,8 @@ public class WarehouseAPIMapperTest {
     void assert_that_Order_to_OrderDto_mapping_works_good(int year, int month, int dayOfMonth, int hour, int minute, double price) {
         Order order = new Order(
                 LocalDateTime.of(year, month, dayOfMonth, hour, minute),
-                price,
-                null);
+                BigDecimal.valueOf(price));
+
         OrderDto orderDto = mapper.OrderToOrderDto(order);
         Assertions.assertEquals(orderDto.getTotalPrice(), order.getTotalPrice());
         Assertions.assertEquals(orderDto.getOrderDate(),
@@ -51,14 +52,13 @@ public class WarehouseAPIMapperTest {
                 order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 
-    @ParameterizedTest(name = "{index} => name={0}, price={1}")
+    @ParameterizedTest
     @MethodSource("provideParametersForProduct")
     void assert_that_Product_to_ProductDto_mapping_works_good(String name, double price) {
-        ProductDto product = mapper.ProductToProductDto( new Product(
-                name, price, null));
+        ProductDto product = mapper.ProductToProductDto( new Product(name, BigDecimal.valueOf(price)));
 
         Assertions.assertEquals(name, product.getName());
-        Assertions.assertEquals(price, product.getPrice());
+        Assertions.assertEquals(price, product.getPrice().doubleValue());
     }
 
     private static Stream<Arguments> provideParametersForOrderDtotoOrder() {

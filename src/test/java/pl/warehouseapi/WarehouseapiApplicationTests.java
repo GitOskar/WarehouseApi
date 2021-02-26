@@ -11,5 +11,4 @@ class WarehouseapiApplicationTests {
 	void contextLoads() {
 		Assertions.assertTrue(true);
 	}
-
 }

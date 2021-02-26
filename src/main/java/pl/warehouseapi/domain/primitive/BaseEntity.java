@@ -1,10 +1,11 @@
 package pl.warehouseapi.domain.primitive;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
+@Getter @Setter
 @MappedSuperclass
 public class BaseEntity {
 

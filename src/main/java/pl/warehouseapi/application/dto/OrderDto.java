@@ -2,14 +2,17 @@ package pl.warehouseapi.application.dto;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Data
 public class OrderDto {
     private Integer id;
     private String orderDate;
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
-    public OrderDto(String orderDate, Double totalPrice) {
+    public OrderDto(String orderDate, double totalPrice) {
         this.orderDate = orderDate;
-        this.totalPrice = totalPrice;
+        this.totalPrice = BigDecimal.valueOf(totalPrice);
     }
 }
