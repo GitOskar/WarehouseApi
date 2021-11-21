@@ -1,5 +1,5 @@
 # Introduction
-API that creates and stores data about orders and products in database.
+API that creates and stores data about orders and products in database. 
 
 ## API documentation:
 ## POST /warehouseapi/product
